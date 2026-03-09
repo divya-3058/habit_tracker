@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block title %} — Register{% endblock %}
+{% block body %}
+<div class="auth-page">
+  <div class="auth-bg">
+    <div class="bg-orb o1"></div>
+    <div class="bg-orb o2"></div>
+    <div class="bg-orb o3"></div>
+    <div class="bg-orb o4"></div>
+  </div>
+
+  <div class="auth-card">
+    <div class="auth-logo">
+      <span class="logo-tent">🎠</span>
+      <h1>Join the Carnival!</h1>
+      <p>Create your habit hero account</p>
+    </div>
+
+    <form method="POST" action="{{ url_for('auth.register') }}" class="auth-form">
+      <div class="form-field">
+        <label>Username</label>
+        <input type="text" name="username" placeholder="Choose a username (3+ chars)…"
+               required minlength="3" autocomplete="username" autofocus>
+      </div>
+      <div class="form-field">
+        <label>Email</label>
+        <input type="email" name="email" placeholder="your@email.com"
+               required autocomplete="email">
+      </div>
+      <div class="form-field">
+        <label>Password</label>
+        <input type="password" name="password" placeholder="Min 6 characters…"
+               required minlength="6" autocomplete="new-password">
+      </div>
+      <div class="form-field">
+        <label>Confirm Password</label>
+        <input type="password" name="confirm" placeholder="Repeat your password…"
+               required autocomplete="new-password">
+      </div>
+      <button type="submit" class="btn-auth">🎪 Create My Hero!</button>
+    </form>
+
+    <p class="auth-switch">
+      Already a hero? <a href="{{ url_for('auth.login') }}">Login here</a>
+    </p>
+  </div>
+</div>
+{% endblock %}
