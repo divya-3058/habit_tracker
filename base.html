@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+  <meta name="theme-color" content="#12002b">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Habit Carnival">
+  <link rel="manifest" href="/manifest.json">
+  <title>🎪 Habit Carnival{% block title %}{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  {% block head %}{% endblock %}
+</head>
+<body>
+
+<!-- Flash messages -->
+{% with msgs = get_flashed_messages(with_categories=true) %}
+  {% if msgs %}
+  <div class="flash-wrap" id="flashWrap">
+    {% for cat, msg in msgs %}
+    <div class="flash flash-{{ cat }}">{{ msg }}</div>
+    {% endfor %}
+  </div>
+  {% endif %}
+{% endwith %}
+
+{% block body %}{% endblock %}
+
+<script>
+(function(){
+  var fw = document.getElementById('flashWrap');
+  if (!fw) return;
+  setTimeout(function(){
+    fw.querySelectorAll('.flash').forEach(function(el){
+      el.style.animation = 'flashOut .4s forwards';
+      setTimeout(function(){ el.remove(); }, 400);
+    });
+  }, 3800);
+})();
+</script>
+{% block scripts %}{% endblock %}
+</body>
+</html>
